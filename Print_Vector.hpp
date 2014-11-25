@@ -3,7 +3,7 @@
 //       Filename:  Print_Vector.hpp
 //
 //    Description:  Print Vector
-//                  Print a vector with elements separated by a comma and space
+//                  Print a vector with elements separated by a space
 //
 //        Version:  1.0
 //        Created:  06/Nov/2014 20:24:34
