@@ -5,8 +5,7 @@
 //    Description:  D Neighborhood
 //
 //                  Returns a set containing all DNA strings with the same
-//                  length of 'pattern' with at most 'dist' mismatches with
-//                  'pattern'.
+//                  length of 'str' with at most 'dist' mismatches with 'str'.
 //
 //        Version:  1.0
 //        Created:  09/Nov/2014 00:36:29
@@ -22,29 +21,37 @@
 #include <set>
 
 
-// TODO: Remove redundance to improve performance
-void Modify_Position(std::string pattern, int dist, unsigned int idx, std::set<std::string> &neighbors)
+void Permute(std::string str, unsigned int idx, int dist, std::set<std::string> &neighbors)
 {
-    if (dist)
+    if (idx == str.length())
+        neighbors.insert(str);
+    else
     {
-        for (unsigned int i = 0; i < 4; ++i)
+        if (dist > 0)
         {
-            pattern[idx] = "ACGT"[i];
-            neighbors.insert(pattern);
+            char temp = str[idx];
 
-            for (unsigned int j = idx + 1; j < pattern.length(); ++j)
-                Modify_Position(pattern, dist - 1, j, neighbors);
+            for (int i = 0; i < 4; ++i)
+            {
+                str[idx] = "ACTG"[i];
+
+                if (str[idx] == temp)
+                    Permute(str, idx + 1, dist, neighbors);
+                else
+                    Permute(str, idx + 1, dist - 1, neighbors);
+            }
+
+            str[idx] = temp;
         }
+        else
+            Permute(str, idx + 1, dist, neighbors);
     }
 }
 
 
-std::set<std::string> D_Neighborhood(std::string pattern, int dist)
+std::set<std::string> D_Neighborhood(std::string str, int dist)
 {
     std::set<std::string> neighbors;
-
-    for (unsigned int i = 0; i < pattern.length(); ++i)
-        Modify_Position(pattern, dist, i, neighbors);
-
+    Permute(str, 0, dist, neighbors);
     return neighbors;
 }
