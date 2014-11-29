@@ -19,7 +19,7 @@
 
 
 template<typename T>
-void Print_Auto(T x)
+void Print_Auto(T x, char separator = ' ')
 {
     bool first = true;
 
@@ -31,7 +31,7 @@ void Print_Auto(T x)
             std::cout << el;
         }
         else
-            std::cout << " " << el;
+            std::cout << separator << el;
     }
 
     std::cout << std::endl;
