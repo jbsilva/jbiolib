@@ -33,3 +33,16 @@ std::vector<int> Prefix_Mass(std::string peptide)
 
     return prefix_mass;
 }
+
+
+std::vector<int> Prefix_Mass(std::vector<int> peptide)
+{
+    std::vector<int> prefix_mass;
+    prefix_mass.resize(peptide.size() + 1);
+    prefix_mass[0] = 0;
+
+    for (unsigned int i = 0; i < peptide.size(); ++i)
+        prefix_mass[i + 1] = prefix_mass[i] + peptide[i];
+
+    return prefix_mass;
+}
