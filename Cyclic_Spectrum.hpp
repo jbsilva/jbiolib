@@ -19,24 +19,32 @@
 #include <map>
 #include <algorithm>
 #include "Prefix_Mass.hpp"
+#include "Peptide_Str_To_Mass.hpp"
 
 
-std::vector<int> Cyclic_Spectrum(std::string peptide)
+// Receives a peptide as a vector with the integer masses of each amino acid
+std::vector<int> Cyclic_Spectrum(std::vector<int> peptide)
 {
     std::vector<int> prefix_mass = Prefix_Mass(peptide);
     std::vector<int> c_spectrum;
     c_spectrum.push_back(0);
-    int peptide_mass = prefix_mass[peptide.length()];
+    int peptide_mass = prefix_mass[peptide.size()];
 
-    for (unsigned int i = 0; i < peptide.length(); ++i)
-        for (unsigned int j = i + 1; j <= peptide.length(); ++j)
+    for (unsigned int i = 0; i < peptide.size(); ++i)
+        for (unsigned int j = i + 1; j <= peptide.size(); ++j)
         {
             c_spectrum.push_back(prefix_mass[j] - prefix_mass[i]);
 
-            if (i > 0 && j < peptide.length())
+            if (i > 0 && j < peptide.size())
                 c_spectrum.push_back(peptide_mass - (prefix_mass[j] - prefix_mass[i]));
         }
 
     sort(c_spectrum.begin(), c_spectrum.end());
     return c_spectrum;
+}
+
+
+std::vector<int> Cyclic_Spectrum(std::string peptide)
+{
+    return Cyclic_Spectrum(Peptide_Str_To_Mass(peptide));
 }
