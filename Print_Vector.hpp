@@ -18,17 +18,16 @@
 #pragma once
 #include <iostream>
 #include <vector>
-using namespace std;
 
 
 template<typename T>
-void Print_Vector(vector<T> v, const char separator = ' ')
+void Print_Vector(std::vector<T> v, const std::string separator = " ", const std::string end = "\n")
 {
-    typename vector< T >::iterator it = v.begin();
-    cout << *it;
+    typename std::vector< T >::iterator it = v.begin();
+    std::cout << *it;
 
     for (++it; it != v.end(); ++it)
-        cout << separator << *it;
+        std::cout << separator << *it;
 
-    cout << endl;
+    std::cout << end;
 }

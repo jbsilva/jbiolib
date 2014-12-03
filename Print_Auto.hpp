@@ -19,11 +19,11 @@
 
 
 template<typename T>
-void Print_Auto(T x, char separator = ' ')
+void Print_Auto(T x, string separator = " ", const std::string end = "\n")
 {
     bool first = true;
 
-    for (auto &el : x)
+    for (const auto &el : x)
     {
         if (first)
         {
@@ -34,5 +34,5 @@ void Print_Auto(T x, char separator = ' ')
             std::cout << separator << el;
     }
 
-    std::cout << std::endl;
+    std::cout << end;
 }
