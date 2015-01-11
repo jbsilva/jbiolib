@@ -27,13 +27,10 @@
 
 std::vector< std::vector<int> > Cyclopeptide_From_Ideal_Spectrum(std::vector<int> spectrum)
 {
-    std::vector< std::vector<int> > peptides = { {57}, {71}, {87}, {97}, {99},
-        {101}, {103}, {113}, {114}, {115}, {128}, {129}, {131}, {137}, {147},
-        {156}, {163}, {186}
-    };
+    std::vector< std::vector<int> > peptides;
     std::vector < std::vector <int> > ans;
 
-    while (!peptides.empty())
+    do
     {
         Expand_Peptide(peptides);
 
@@ -51,6 +48,7 @@ std::vector< std::vector<int> > Cyclopeptide_From_Ideal_Spectrum(std::vector<int
                 peptides.erase(--p_it.base());
         }
     }
+    while (!peptides.empty());
 
     return ans;
 }
